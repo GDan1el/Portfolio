@@ -3,6 +3,7 @@
 #include <Bounce2.h>
 #include <button_handler.h>
 
+//wenn das funktioniert geht der Ständer von hier bis Düsseldorf Junge
 // Pin Deklarationen von der Hauptseite
 #define PIN_LED_MAIN_LOGO 18
 #define PIN_LED_MAIN_INF 19
