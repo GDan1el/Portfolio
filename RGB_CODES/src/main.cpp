@@ -169,11 +169,13 @@ void loop() {
   
   
   
-  
+  // die Farben der LEDs werden hier an die drei Streifen jeweils mit der Helligkeit in den Klammern gesendet, die Reihenfolge wurde im Setup festgelegt
   FastLED[0].showLeds(led_inf_brightness);
   FastLED[1].showLeds(led_tri_brightness);
   FastLED[2].showLeds(led_logo_brightness);
 
+  // ein Ansatz die Leistung der LEDs zu berechnen, abhängig davon ob Stromversorgung über USB oder Netzteil kann weniger oder mehr Leistung gezogen werden
+  // daraus lassen sich dann die maximalen Helligkeiten berechnen
   power_usage = (calculate_unscaled_power_mW(led_main_inf, LED_NUM_INFINITY)*led_inf_brightness + calculate_unscaled_power_mW(led_main_tri, LED_NUM_TRIANGLE)*led_tri_brightness + calculate_unscaled_power_mW(led_main_logo, LED_NUM_LOGO)*led_logo_brightness)/255;
   //power_usage = (calculate_unscaled_power_mW(led_main_inf, LED_NUM_INFINITY) + calculate_unscaled_power_mW(led_main_tri, LED_NUM_TRIANGLE) + calculate_unscaled_power_mW(led_main_logo, LED_NUM_LOGO));
 
