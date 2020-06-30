@@ -5,7 +5,7 @@ Codes zur visuellen Gestaltung mithilfe der Leuchtmittel am ShotpongTisch.
 dann hau mal
 
 ### Betreff Hurensohn
-Sehr geehrter Herr GDab1el,
+Sehr geehrter Herr GDan1el,
 Dieses Repository ist kein Spielplatz, ich bitte Sie der Sache mit entprechner Ernsthaftigkeit nachzugehen
 MFG
 Ich
