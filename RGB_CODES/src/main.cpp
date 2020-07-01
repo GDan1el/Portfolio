@@ -4,7 +4,7 @@
 #include <button_handler.h>
 
 //wenn das funktioniert geht der Ständer von hier bis Düsseldorf Junge
-// Pin Deklarationen von der Hauptseite
+// Pin Deklarationen von der Masterseite
 #define PIN_LED_MAIN_LOGO 18
 #define PIN_LED_MAIN_INF 19
 #define PIN_LED_MAIN_TRI 21
