@@ -16,9 +16,9 @@
 
 
 // Pin Deklarationen der Slaveseite
-#define PIN_LED_SLAVE_1 22
-#define PIN_LED_SLAVE_2 23
-#define PIN_LED_SLAVE_3 25
+#define PIN_LED_SLAVE_LOGO 22
+#define PIN_LED_SLAVE_TRI 23
+#define PIN_LED_SLAVE_INF 25
 
 
 
@@ -146,9 +146,9 @@ void setup() {
   FastLED.addLeds<WS2812B, PIN_LED_MAIN_TRI, GRB>(led_main_tri, LED_NUM_TRIANGLE);
   FastLED.addLeds<WS2812B, PIN_LED_MAIN_LOGO, GRB>(led_main_logo, LED_NUM_LOGO);
 
-  FastLED.addLeds<WS2812B, PIN_LED_SLAVE_3, GRB>(led_slave_inf, LED_NUM_INFINITY);
-  FastLED.addLeds<WS2812B, PIN_LED_SLAVE_2, GRB>(led_slave_tri, LED_NUM_TRIANGLE);
-  FastLED.addLeds<WS2812B, PIN_LED_SLAVE_1, GRB>(led_slave_logo, LED_NUM_LOGO);
+  FastLED.addLeds<WS2812B, PIN_LED_SLAVE_INF, GRB>(led_slave_inf, LED_NUM_INFINITY);
+  FastLED.addLeds<WS2812B, PIN_LED_SLAVE_TRI, GRB>(led_slave_tri, LED_NUM_TRIANGLE);
+  FastLED.addLeds<WS2812B, PIN_LED_SLAVE_LOGO, GRB>(led_slave_logo, LED_NUM_LOGO);
 
 
 
