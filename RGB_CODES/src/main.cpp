@@ -37,14 +37,15 @@ CRGB led_main_inf[LED_NUM_INFINITY] = CRGB::Black;
 CRGB led_main_tri[LED_NUM_TRIANGLE] = CRGB::Black;
 CRGB led_main_logo[LED_NUM_LOGO] = CRGB::Black;
 
-CRGB led_slave_inf[LED_NUM_INFINITY];
-CRGB led_slave_tri[LED_NUM_TRIANGLE];
-CRGB led_slave_logo[LED_NUM_LOGO];
+CRGB led_slave_inf[LED_NUM_INFINITY] = CRGB::Black;
+CRGB led_slave_tri[LED_NUM_TRIANGLE] = CRGB::Black;
+CRGB led_slave_logo[LED_NUM_LOGO] = CRGB::Blue;
+
 
 // für jede Gruppe an LEDs gibt es eine Helligkeit um zb das Logo unabhängig hell vom rest zu beleuchten
 uint8_t led_inf_brightness = 32;
 uint8_t led_tri_brightness = 32;
-uint8_t led_logo_brightness = 32;
+uint8_t led_logo_brightness = 200;
 
 int lastH = 0;
 float DELTA_H = 256.0/(RAINBOW_PERIOD*FPS);
@@ -78,10 +79,12 @@ uint8_t update_LED_rainbow(uint8_t deltaH, uint8_t lastH) {
     if ((lastH+deltaH)<=255) {
       // wenn die H Komponente im nächsten Schritt noch im Bereich 0-255 liegt
       led_main_inf[i] = rainbow_at_led(i, LED_NUM_INFINITY, lastH+deltaH);
+      led_slave_inf[i] = rainbow_at_led(i, LED_NUM_INFINITY, lastH+deltaH);
     } else {
       // wenn das nächste H einen Wert größer 255 (>=256) hätte
       // übergib den Wert der Summe, der den "Überlauf" darstellt
       led_main_inf[i] = rainbow_at_led(i, LED_NUM_INFINITY, (lastH+deltaH)%255); 
+      led_slave_inf[i] = rainbow_at_led(i, LED_NUM_INFINITY, (lastH+deltaH)%255);
     }
     
   }
@@ -123,23 +126,40 @@ void setup() {
   for (int i=0; i<LED_NUM_TRIANGLE; i++) {
     CHSV hsv = rainbow_at_led(i, LED_NUM_TRIANGLE, 0);
     led_main_tri[i] = hsv;
+    led_slave_tri[i] = hsv;
     
   }
 
   for (int i=0; i<LED_NUM_LOGO; i++) {
-    led_main_logo[i] = CRGB::White;
+    led_main_logo[i] = CRGB::SkyBlue;
   }
+
+  // die slave seite mit 1, 2 und 3 leds initialisieren
+  led_slave_inf[0] = CRGB::Red;
+
+  led_slave_tri[1] = CRGB::Red;
+
+
 
    // set up the LEDs
   FastLED.addLeds<WS2812B, PIN_LED_MAIN_INF, GRB>(led_main_inf, LED_NUM_INFINITY);
   FastLED.addLeds<WS2812B, PIN_LED_MAIN_TRI, GRB>(led_main_tri, LED_NUM_TRIANGLE);
   FastLED.addLeds<WS2812B, PIN_LED_MAIN_LOGO, GRB>(led_main_logo, LED_NUM_LOGO);
 
+  FastLED.addLeds<WS2812B, PIN_LED_SLAVE_3, GRB>(led_slave_inf, LED_NUM_INFINITY);
+  FastLED.addLeds<WS2812B, PIN_LED_SLAVE_2, GRB>(led_slave_tri, LED_NUM_TRIANGLE);
+  FastLED.addLeds<WS2812B, PIN_LED_SLAVE_1, GRB>(led_slave_logo, LED_NUM_LOGO);
+
+
 
 
   FastLED[0].showLeds(led_inf_brightness);  // FastLED[0] setzt den LED Streifen außenrum
   FastLED[1].showLeds(led_tri_brightness);  // FastLED[1] setzt das Dreieck
   FastLED[2].showLeds(led_logo_brightness); // FastLED[2] setzt die Logo LEDs
+
+  FastLED[3].showLeds(led_inf_brightness);  // FastLED[3] setzt den LED Streifen außenrum
+  FastLED[4].showLeds(led_tri_brightness);  // FastLED[4] setzt das Dreieck
+  FastLED[5].showLeds(led_logo_brightness); // FastLED[5] setzt die Logo LEDs
 
   Serial.println(calculate_unscaled_power_mW(led_main_inf, LED_NUM_INFINITY));
 
@@ -151,7 +171,7 @@ void loop() {
   if(button_main_back.update() && button_main_back.read()){
     Serial.println("Knopf zuruck");
     // reduziere die Helligkeit um eins
-    led_inf_brightness--;
+    led_logo_brightness--;
   }
   if(button_main_mid.update() && button_main_mid.read()){
     Serial.println("Knopf mitte");
@@ -159,7 +179,7 @@ void loop() {
   if(button_main_for.update() && button_main_for.read()){
     Serial.println("Knopf vor");
     // erhöhe die Helligkeit um eins
-    led_inf_brightness++;
+    led_logo_brightness++;
   }
 
   // begrenze die Helligkeit auf 0 - 255
@@ -173,6 +193,10 @@ void loop() {
   FastLED[0].showLeds(led_inf_brightness);
   FastLED[1].showLeds(led_tri_brightness);
   FastLED[2].showLeds(led_logo_brightness);
+
+  FastLED[3].showLeds(led_inf_brightness);  // FastLED[3] setzt den LED Streifen außenrum
+  FastLED[4].showLeds(led_tri_brightness);  // FastLED[4] setzt das Dreieck
+  FastLED[5].showLeds(led_logo_brightness); // FastLED[5] setzt die Logo LEDs
 
   // ein Ansatz die Leistung der LEDs zu berechnen, abhängig davon ob Stromversorgung über USB oder Netzteil kann weniger oder mehr Leistung gezogen werden
   // daraus lassen sich dann die maximalen Helligkeiten berechnen
