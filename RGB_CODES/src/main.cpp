@@ -76,27 +76,16 @@ CHSV rainbow_at_led(int currentLED, int numLED, uint8_t initH) {
 
 uint8_t update_LED_rainbow(uint8_t deltaH, uint8_t lastH) {
   for (int i=0; i<LED_NUM_INFINITY; i++) {
-    if ((lastH+deltaH)<=255) {
-      // wenn die H Komponente im nächsten Schritt noch im Bereich 0-255 liegt
-      led_main_inf[i] = rainbow_at_led(i, LED_NUM_INFINITY, lastH+deltaH);
-      led_slave_inf[i] = rainbow_at_led(i, LED_NUM_INFINITY, lastH+deltaH);
-    } else {
-      // wenn das nächste H einen Wert größer 255 (>=256) hätte
-      // übergib den Wert der Summe, der den "Überlauf" darstellt
-      led_main_inf[i] = rainbow_at_led(i, LED_NUM_INFINITY, (lastH+deltaH)%255); 
-      led_slave_inf[i] = rainbow_at_led(i, LED_NUM_INFINITY, (lastH+deltaH)%255);
-    }
+    // setze den Startwert des Regenbogens auf deltaH+lastH
+    led_main_inf[i] = rainbow_at_led(i, LED_NUM_INFINITY, (lastH+deltaH)%255); 
+    led_slave_inf[i] = rainbow_at_led(i, LED_NUM_INFINITY, (lastH+deltaH)%255);
+    
     
   }
+  // gebe das aktuelle bzw das H für den nächsten Schritt zurück
   uint8_t nextH = lastH+deltaH;
-
-  if (nextH > 256) {
-    // wenn nextH 255 übersteigen sollte, dann gib den Übertrag zurück
-    nextH = nextH%255;
-  }
-  //Serial.println("nextH = " + String(nextH));
-  //Serial.println("=================================");
-  return nextH;
+  // guck für den Überlauf
+  return nextH%255;
 }
 
 
