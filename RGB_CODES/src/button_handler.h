@@ -27,11 +27,19 @@ void setupButtons() {
     pinMode(PIN_BUTTON_SLAVE_2, INPUT_PULLUP);
     pinMode(PIN_BUTTON_SLAVE_3, INPUT_PULLUP);
 
-    button_main_back.attach(PIN_BUTTON_MAIN_3);
+    button_main_down.attach(PIN_BUTTON_MAIN_3);
     button_main_mid.attach(PIN_BUTTON_MAIN_2);
-    button_main_for.attach(PIN_BUTTON_MAIN_1);
+    button_main_up.attach(PIN_BUTTON_MAIN_1);
 
-    button_main_back.interval(5);
+    button_main_down.interval(5);
     button_main_mid.interval(5);
-    button_main_for.interval(5);
+    button_main_up.interval(5);
+
+    button_slave_down.attach(PIN_BUTTON_SLAVE_3);
+    button_slave_mid.attach(PIN_BUTTON_SLAVE_2);
+    button_slave_up.attach(PIN_BUTTON_SLAVE_1);
+
+    button_slave_down.interval(5);
+    button_slave_mid.interval(5);
+    button_slave_up.interval(5);
 }

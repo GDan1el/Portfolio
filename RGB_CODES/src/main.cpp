@@ -51,6 +51,9 @@ int lastH = 0;
 float DELTA_H = 256.0/(RAINBOW_PERIOD*FPS);
 float power_usage = 0;
 
+uint8_t main_logo_H = 0;  // Farbwert für die Logo LEDs der Main Seite
+uint8_t slave_logo_H = 128;   // Frabwert für Slave Seite ~ blau
+
 
 
 
@@ -157,7 +160,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  if(button_main_back.update() && button_main_back.read()){
+  if(button_main_down.update() && button_main_down.read()){
     Serial.println("Knopf zuruck");
     // reduziere die Helligkeit um eins
     led_logo_brightness--;
@@ -165,7 +168,7 @@ void loop() {
   if(button_main_mid.update() && button_main_mid.read()){
     Serial.println("Knopf mitte");
   }
-  if(button_main_for.update() && button_main_for.read()){
+  if(button_main_up.update() && button_main_up.read()){
     Serial.println("Knopf vor");
     // erhöhe die Helligkeit um eins
     led_logo_brightness++;
