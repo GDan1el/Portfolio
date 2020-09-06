@@ -43,16 +43,25 @@ CRGB led_slave_logo[LED_NUM_LOGO] = CRGB::Blue;
 
 
 // für jede Gruppe an LEDs gibt es eine Helligkeit um zb das Logo unabhängig hell vom rest zu beleuchten
+// diese beiden Helligkeiten sind allgemein für eine Spielseite über die Eingabe steuerbar
+uint8_t main_brightness = 20;
+uint8_t slave_brightness = 20;
+
+// Die einzelnen Hellogkeiten werden dann vom Programm selber angesteuert
 uint8_t led_inf_brightness = 32;
-uint8_t led_tri_brightness = 32;
+uint8_t led_tri_brightness = 40;
 uint8_t led_logo_brightness = 200;
+
+uint8_t main_logo_H = 0;  // Farbwert für die Logo LEDs der Main Seite
+uint8_t slave_logo_H = 128;   // Frabwert für Slave Seite ~ blau
+
+
 
 int lastH = 0;
 float DELTA_H = 256.0/(RAINBOW_PERIOD*FPS);
 float power_usage = 0;
 
-uint8_t main_logo_H = 0;  // Farbwert für die Logo LEDs der Main Seite
-uint8_t slave_logo_H = 128;   // Frabwert für Slave Seite ~ blau
+
 
 
 
