@@ -10,9 +10,13 @@
 #define PIN_BUTTON_SLAVE_3 5
 
 // Um die Eingabe zu kontrollieren wird die Bounce2 Bibliothek verwendet, für jeden Knopf eine Instanz
-Bounce button_main_back = Bounce();
+Bounce button_main_down = Bounce();
 Bounce button_main_mid = Bounce();
-Bounce button_main_for = Bounce();
+Bounce button_main_up = Bounce();
+
+Bounce button_slave_down = Bounce();
+Bounce button_slave_mid = Bounce();
+Bounce button_slave_up = Bounce();
 
 //Bounce button_slave_back = Bounce();
 //Bounce button_slave_mid = Bounce();
