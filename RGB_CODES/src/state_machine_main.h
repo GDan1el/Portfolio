@@ -3,20 +3,31 @@
 
 int current_state = 0;
 int last_state = -1;
-#define FPS 120 // frames per seconds
-#define STATE_NUM 4 // Anzahl an Zuständen
-unsigned long last_millis = 0;
 
-void loop(){
+#define STATE_NUM 4 // Anzahl an Zuständen
+#define MENU_TIMEOUT 5000 // nach XXX Millisekunden soll von jedem Menüpunkt wieder ins Hauptmenü gesprungen werden
+#define FPS 120 // Aktualisierungsrate der Berechnungen und LEDs
+unsigned long last_millis = 0;
+unsigned long last_input = 0;   // speichert den letzten input um nach gewisser Zeit ins Hauptmenü zurück zu springen
+
+void update_stm(){
 
     if ((millis() - last_millis) >= (1/FPS*1000)){
-    // all dieser Code wird mit alle 1/FPS Sekunden ausgeführt
+    // all dieser Code wird alle 1/FPS Sekunden ausgeführt
         last_millis = millis(); 
 
         if(button_main_mid.update() && button_main_mid.read()){
         // state bei Tastendruck wechseln
         current_state = (current_state + 1) % STATE_NUM;
+        // speicher Zeitpunkt der letzten Eingabe
+        last_input = millis();
         
+        }
+
+        if ((millis() - last_input) >=  MENU_TIMEOUT && current_state != 0){
+            // Springe zurück ins Hauptmenü
+            last_state = current_state; // noch nicht ganz klar ob dieser Schritt Sinn macht
+            current_state = 0;
         }
     
 

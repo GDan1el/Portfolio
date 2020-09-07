@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <button_handler.h>
 #include <led_handler.h>
+#include <state_machine_main.h>
 
 // Länge der einzelnen Streifen, beide Seiten sollten gleich lang sein
 #define LED_NUM_INFINITY 65
@@ -39,6 +40,8 @@ void setup(){
 
 
 void loop(){
+
+    update_stm();
 
 
 
