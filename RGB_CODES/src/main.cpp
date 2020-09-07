@@ -4,10 +4,7 @@
 #include <button_handler.h>
 
 //wenn das funktioniert geht der Ständer von hier bis Düsseldorf Junge
-// Pin Deklarationen von der Masterseite
-#define PIN_LED_MAIN_LOGO 18
-#define PIN_LED_MAIN_INF 19
-#define PIN_LED_MAIN_TRI 21
+
 
 
 
@@ -15,17 +12,6 @@
 #define PIN_POWER_SOURCE 15
 
 
-// Pin Deklarationen der Slaveseite
-#define PIN_LED_SLAVE_LOGO 22
-#define PIN_LED_SLAVE_TRI 23
-#define PIN_LED_SLAVE_INF 25
-
-
-
-// Länge der einzelnen Streifen, beide Seiten sollten gleich lang sein
-#define LED_NUM_INFINITY 65
-#define LED_NUM_TRIANGLE 37
-#define LED_NUM_LOGO 4  
 
 // andere KOnstanten
 #define RAINBOW_PERIOD 1  // Periode einer Umrundung des Regenbogens in Sekunden
@@ -142,14 +128,7 @@ void setup() {
 
 
 
-   // set up the LEDs
-  FastLED.addLeds<WS2812B, PIN_LED_MAIN_INF, GRB>(led_main_inf, LED_NUM_INFINITY);
-  FastLED.addLeds<WS2812B, PIN_LED_MAIN_TRI, GRB>(led_main_tri, LED_NUM_TRIANGLE);
-  FastLED.addLeds<WS2812B, PIN_LED_MAIN_LOGO, GRB>(led_main_logo, LED_NUM_LOGO);
-
-  FastLED.addLeds<WS2812B, PIN_LED_SLAVE_INF, GRB>(led_slave_inf, LED_NUM_INFINITY);
-  FastLED.addLeds<WS2812B, PIN_LED_SLAVE_TRI, GRB>(led_slave_tri, LED_NUM_TRIANGLE);
-  FastLED.addLeds<WS2812B, PIN_LED_SLAVE_LOGO, GRB>(led_slave_logo, LED_NUM_LOGO);
+ 
 
 
 
