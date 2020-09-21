@@ -2,6 +2,9 @@ int current_state = -1;
 #define FPS 120 // frames per seconds
 #define STATE_NUM 4 // Anzahl an Zuständen
 unsigned long last_millis = 0;
+#include <button_handler.h>
+
+
 
 void loop(){
 
@@ -42,9 +45,24 @@ void loop(){
 
         if (current_state == 3){    // Helligkeit einstellen
             // Mit den beiden Tasten die Helligkeit ändern
-
-
+            // Die Helligkeit des Logos soll sich nicht ändern lassen
+            if (button_main_up.update() && button_main_up.read()){
+                // Ist bereits der höchste Helligekeitswert erreicht soll nichts passieren
+                if (led_inf_brightness != 224){
+               led_inf_brightness += (32 % 256);
+               led_tri_brightness += (32 % 256);  
             
+                }
+            }
+                //power_usage = (calculate_unscaled_power_mW(led_main_inf, LED_NUM_INFINITY)*led_inf_brightness + calculate_unscaled_power_mW(led_main_tri, LED_NUM_TRIANGLE)*led_tri_brightness + calculate_unscaled_power_mW(led_main_logo, LED_NUM_LOGO)*led_logo_brightness)/255;
+            if (button_main_down.update() && button_main_down.read()){
+                // Ist bereits der niedrigste Helligekeitswert erreicht soll nichts passieren
+                if(led_inf_brightness != 0 ){
+               led_inf_brightness -= (32 % 256);
+               led_tri_brightness -= (32 % 256);  
+                }
+            } 
+                    
         }
 
         if (current_state == 4){    // Logofarbe wählen
