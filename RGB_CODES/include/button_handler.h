@@ -47,3 +47,8 @@ void setupButtons() {
     button_slave_mid.interval(5);
     button_slave_up.interval(5);
 }
+
+bool button_activity_main(){
+    // wenn sich der Status von einem Button geändert hat gebe 1 zurück
+    return button_main_down.update() || button_main_mid.update() || button_main_up.update();
+}
